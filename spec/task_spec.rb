@@ -2,6 +2,10 @@ require 'rspec'
 require 'task'
 
 describe(Task) do
+  before() do
+    Task.clear()
+  end
+
   describe("#description") do
     it("let's you describe the task") do
       test_task = Task.new("do the chores")
