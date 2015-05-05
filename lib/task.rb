@@ -1,28 +1,28 @@
 class Task
 
-  attr_reader(:list_id, :description)
+  attr_reader(:task_type, :name)
 
   define_method(:initialize) do |attributes|
-    @list_id = attributes.fetch(:list_id)
-    @description = attributes.fetch(:description)
+    @task_type = attributes.fetch(:task_type)
+    @name = attributes.fetch(:name)
   end
 
   define_singleton_method(:all) do
-    returned_tasks = DB.exec("SELECT * FROM tasks;")
+    returned_tasks = DB.exec("SELECT * FROM task;")
     tasks = []
     returned_tasks.each do |task|
-      list_id = task.fetch("list_id").to_i()
-      description = task.fetch("description")
-      tasks.push(Task.new({:list_id => list_id, :description => description}))
+      task_type = task.fetch("task_type").to_i()
+      name = task.fetch("name")
+      tasks.push(Task.new({:task_type => task_type, :name => name}))
     end
     tasks
   end
 
   define_method(:save) do
-    DB.exec("INSERT INTO tasks (list_id, description) VALUES (#{@list_id}, '#{@description}')")
+    DB.exec("INSERT INTO task (name, task_type) VALUES ('#{@name}', #{@task_type});")
   end
 
   define_method(:==) do |another_task|
-    self.description().==(another_task.description())
+    self.name().==(another_task.name())
   end
 end

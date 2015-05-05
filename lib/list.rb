@@ -1,27 +1,24 @@
 class List
 
-  attr_reader(:id, :name, :type)
+  attr_reader(:id, :name)
 
   define_method(:initialize) do |attributes|
-    @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
-    @type = attributes.fetch(:type)    
   end
 
   define_singleton_method(:all) do
-    returned_lists = DB.exec("SELECT * FROM lists;")
+    returned_lists = DB.exec("SELECT * FROM list;")
     lists = []
     returned_lists.each do |list|
       id = list.fetch("id").to_i()
       name = list.fetch("name")
-      type = list.fetch("type")
-      lists.push(List.new({:id => id, :name => name, :type => type}))
+      lists.push(List.new({:id => id, :name => name}))
     end
     lists
   end
 
   define_method(:save) do
-    result = DB.exec("INSERT INTO lists (name, type) VALUES ('#{@name}', '#{@type}') RETURNING id;")
+    result = DB.exec("INSERT INTO list (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
   end
 
