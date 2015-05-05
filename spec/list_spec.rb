@@ -37,20 +37,12 @@ describe(List) do
       expect(List.all()).to(eq([list]))
     end
   end
-#
-#   describe("#==") do
-#     it("is the same list if it has the same name") do
-#       list1 = List.new({:id => nil, :name => "Epicodus stuff"})
-#       list2 = List.new({:id => nil, :name => "Epicodus stuff"})
-#       expect(list1).to(eq(list2))
-#     end
-#   end
 
-  # describe("#task_list") do
-  #   it("is empty at first") do
-  #     list = List.new({:id => nil, :name => "Epicodus Homework", :type => "Homework"})
-  #     expect(list.task_list).to(eq(nil))
-  #     expect(list.number_of_tasks).to(eq(nil))
-  #   end
-  # end
+  describe("#==") do
+    it("is the same list if it has the same name") do
+      list1 = List.new({:id => nil, :name => "Epicodus Homework", :type => "Homework"})
+      list2 = List.new({:id => nil, :name => "Epicodus Homework", :type => "Homework"})
+      expect(list1).to(eq(list2))
+    end
+  end
 end
