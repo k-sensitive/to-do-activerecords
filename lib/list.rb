@@ -5,7 +5,7 @@ class List
   define_method(:initialize) do |attributes|
     @id = attributes.fetch(:id)
     @name = attributes.fetch(:name)
-    @type = attributes.fetch(:type)
+    @type = attributes.fetch(:type)    
   end
 
   define_singleton_method(:all) do
@@ -29,3 +29,5 @@ class List
     self.name().==(another_list.name())
   end
 end
+
+#list_id?
