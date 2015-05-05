@@ -46,7 +46,7 @@ class List
       list_tasks.push(Task.new({:name => name, :task_type => list_id}))
     end
     list_tasks
-end
+  end
 end
 
 
