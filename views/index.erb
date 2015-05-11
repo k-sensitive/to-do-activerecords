@@ -1,9 +1,8 @@
-<h1>To Do Lists</h1>
+<h1>My Tasks:</h1>
 
-<h1>My Lists</h1>
-<ul>
-  <% @lists.each() do |list| %>
-  <li><a href="/lists/<%= list.id %>"><%= list.name %></a></li>
-  <% end %>
-  <a href="/lists/new">Add a new List</a>
-</ul>
+<% @tasks.each() do |task| %>
+  <li><%= task.description() %><a href='/tasks/<%= task.id() %>/edit'>
+    <p>Update this task's description</p></a></li>
+<% end %>
+
+<a href='/tasks/add'>Add Task</a>

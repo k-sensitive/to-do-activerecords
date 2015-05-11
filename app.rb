@@ -1,47 +1,38 @@
 require 'sinatra'
 require 'sinatra/reloader'
+require 'sinatra/activerecord'
 also_reload 'lib/**/*.rb'
 require './lib/task'
-require './lib/list'
+# require './lib/list'
 require 'pg'
 
-DB = PG.connect({:dbname => "to_do_database"})
 
 get('/') do
-  @lists = List.all()
-  erb(:index)
+  @tasks = Task.all()
+  erb(:index) #/tasks/add /tasks/:id/edit
 end
 
-get('/lists/new') do
-  erb(:list_form)
+get('/tasks/add') do
+  erb(:task_form) #/tasks
 end
 
-post('/lists') do
-  @list = List.new({:name => params.fetch("name"), :id => nil}).save()
-  @lists = List.all()
-  erb(:list_success)
+get('/tasks/:id/edit') do
+  @task = Task.find(params.fetch('id').to_i())
+  erb(:task_edit) #/tasks/:id
 end
 
-get("/lists") do
-  @lists = List.all()
-  erb(:index)
+post('/tasks') do
+  description = params.fetch('description')
+  due_date = params.fetch('due_date')
+  Task.create({:description => description, :done => false, :due_date => due_date})
+  @tasks = Task.all()
+  erb(:index) #/tasks
 end
 
-get('/lists/:id') do
-  @list = List.find(params.fetch('id').to_i)
-  erb(:task_list)
-end
-
-get('/lists/:id/task/new') do
-  @list = List.find(params.fetch('id').to_i())
-  erb(:task_form)
-end
-
-post("/tasks") do
-  name = params.fetch("name")
-  task_type = params.fetch("task_type").to_i()
-  @list = List.find(task_type)
-  @task = Task.new({:name => name, :task_type => task_type})
-  @task.save()
-  erb(:task_success)
+patch('/tasks/:id') do
+  description = params.fetch('description')
+  @task = Task.find(params.fetch('id').to_i())
+  @task.update({:description => description})
+  @tasks = Task.all()
+  redirect('/') #/tasks/:id
 end

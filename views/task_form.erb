@@ -2,9 +2,10 @@
 
 <form action="/tasks" method="post">
   <div class="form-group">
-    <label for='name'>Name:</label>
-    <input id="name" name="name" type="text">
-    <input id="task_type" name="task_type" type="hidden" value="<%= @list.id %>">
+    <label for='description'>Enter a description of a task:</label>
+    <input id="description" name="description" type="text">
+    <label for='due_date'>Enter in a due date for this task:</lavel>
+    <input id="due_date" name="due_date" type="date">
   </div>
 
   <button type="submit">Add Task</button>
