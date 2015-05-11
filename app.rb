@@ -5,6 +5,7 @@ also_reload 'lib/**/*.rb'
 require './lib/task'
 # require './lib/list'
 require 'pg'
+require 'pry'
 
 
 get('/') do
@@ -31,8 +32,10 @@ end
 
 patch('/tasks/:id') do
   description = params.fetch('description')
+  done = params.fetch('done')
+  done = done[0]
   @task = Task.find(params.fetch('id').to_i())
-  @task.update({:description => description})
+  @task.update({:description => description, :done => done})
   @tasks = Task.all()
   redirect('/') #/tasks/:id
 end

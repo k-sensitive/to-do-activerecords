@@ -5,4 +5,12 @@
     <p>Update this task's description</p></a></li>
 <% end %>
 
+<h1>My Unfinished Tasks:</h1>
+
+<ul>
+  <% @tasks.not_done().each do |task| %>
+    <li><%= task.description %></li>
+  <% end %>
+</ul>
+
 <a href='/tasks/add'>Add Task</a>
