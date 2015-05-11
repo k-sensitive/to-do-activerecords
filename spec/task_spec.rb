@@ -12,4 +12,11 @@ describe(Task) do
     end
   end
 
+  describe('#list') do
+    it('tells which list it belongs to') do
+      list = List.create({:name => "list"})
+      task = Task.create({:description => "task", :list_id => list.id})
+      expect(task.list()).to(eq(list))
+    end
+  end
 end
