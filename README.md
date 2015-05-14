@@ -4,7 +4,7 @@ By: Kim Dang
 
 ## Description
 
-This app allows people create to-do lists.
+Create to-do lists for your busy, busy life.
 
 Setup Instructions
 ----
