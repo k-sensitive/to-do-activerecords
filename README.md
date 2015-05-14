@@ -2,7 +2,9 @@
 
 By: Kim Dang
 
-Description: This app allows people create to-do lists.
+## Description
+
+This app allows people create to-do lists.
 
 Setup Instructions
 ----
